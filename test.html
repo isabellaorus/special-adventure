@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAC Advanced Team Art Classifier</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', sans-erif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+	    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/800px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg');
+            background-color: #3498db; 
+            color: #fff;
+            padding: 55px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        #content-container {
+            margin: 20px;
+        }
+
+        #project-description {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        #drop-area {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+
+        #preview {
+            max-width: 100%;
+            max-height: 300px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        #project-description p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    BAC Advanced Team Art Recommendation System
+</header>
+
+<div id="content-container">
+
+    <section id="project-description">
+        <h2>About our Project</h2>
+        <p>
+            Our topic is creating a model to help identify different classes and styles of art. 
+	    Unlike songs that can be played and Shazamed, art work is visual and cannot be put into 
+	    words to help define it. Creating a model that can help people understand the genre of 
+	    art they enjoy and help find similar pieces would be both interesting and useful to society, 
+            helping end frustration in finding art styles.
+        </p>
+        <p>
+            Try uploading a piece of art below and see NLP generated recommendations based on your upload!
+        </p>
+    </section>
+
+    <div id="drop-area" onclick="selectFile();">
+        <p>Click here or drag and drop artwork!</p>
+    </div>
+
+    <input type="file" id="file-input" accept="image/*" onchange="handleFileSelect(event)">
+
+    <img id="preview" alt="Preview Image">
+
+</div>
+
+<script>
+    function selectFile() {
+        document.getElementById('file-input').click();
+    }
+
+    function handleFileSelect(event) {
+        var file = event.target.files[0];
+        
+        if (file) {
+            previewImage(file);
+        }
+    }
+
+    function previewImage(file) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            document.getElementById('drop-area').style.display = 'none';
+            document.getElementById('preview').style.display = 'block';
+            document.getElementById('preview').src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+    }
+</script>
+
+</body>
+</html>
